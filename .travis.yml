@@ -12,7 +12,6 @@ install:
  - tar xvf meta-clanton_v1.0.0.tar.gz
  - cd meta-clanton_v1.0.0
  - ./setup.sh
-script:
  - . poky/oe-init-build-env yocto_build
- - bitbake image-full-galileo
+script: bitbake image-full-galileo
 
