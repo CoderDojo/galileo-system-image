@@ -9,5 +9,6 @@ before_install:
  - tar xvf Board_Support_Package_Sources_for_Intel_Quark_v1.0.0/meta-clanton_v1.0.0.tar.gz
  - cd meta-clanton_v1.0.0
  - ./setup.sh
+install: true
 script: true
 
