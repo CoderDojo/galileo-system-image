@@ -9,6 +9,7 @@ before_install:
  - tar -xf galileo-git-1.8.1.2.tar.gz
  - cd galileo-git-1.8.1.2
  - sudo make install 
+ - sudo ln -s /usr/local/bin/git /usr/bin/git
  - which git
  - git --version
 
