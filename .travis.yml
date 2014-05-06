@@ -4,6 +4,11 @@ compiler:
 
 before_install: 
  - sudo apt-get install -y build-essential p7zip-full diffstat texinfo chrpath
+ - wget https://github.com/alan-donnelly/galileo-git/archive/1.8.1.2.tar.gz
+ - tar -xf galileo-git-1.8.1.2.tar.gz
+ - cd galileo-git-1.8.1.2
+ - sudo make prefix=/usr/local install 
+ - git --version
 
 install: 
  - wget http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.0.7z
@@ -13,5 +18,6 @@ install:
  - cd meta-clanton_v1.0.0
  - ./setup.sh
  - . poky/oe-init-build-env yocto_build
+
 script: bitbake image-full-galileo
 
