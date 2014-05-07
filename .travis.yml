@@ -17,16 +17,15 @@ before_install:
  - cd ..
  - rm -rf galileo-git-1.8.1.2
  - sudo ln -s /usr/local/bin/git /usr/bin/git
- - which git
  - git --version
  - cd /home/travis/build/CoderDojo/galileo-system-image
  - mkdir -p meta-clanton_v1.0.0
  - echo "CoderDojo meta-clanton_v1.0.0" > meta-clanton_v1.0.0/README
  - git remote set-url --push origin https://$GH_APP_TOKEN@github.com/CoderDojo/galileo-system-image.git
  - git config user.name alan-donnelly
- - git config user.email alan.donnelly@gmail.com
+ - git config user.email ci@travis-ci.org
  - git checkout -b 'v1.0.0'
- - git add -f meta-clanton_v1.0.0/*
+ - git add meta-clanton_v1.0.0/README
  - git commit -a -m "Updating shared build state. [ci skip]"
  - git push
 
@@ -37,17 +36,20 @@ install:
  - wget http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.0.7z
  - 7z x Board_Support_Package_Sources_for_Intel_Quark_v1.0.0.7z
  - sha1sum -c sha1sum.txt
- - tar xvf meta-clanton_v1.0.0.tar.gz
+ - tar xkvf meta-clanton_v1.0.0.tar.gz
  - cd meta-clanton_v1.0.0
  - cat README
  - ./setup.sh
  - . poky/oe-init-build-env yocto_build
 
-script: ( cmdpid=$BASHPID; (sleep 2700; kill $cmdpid) & exec bitbake image-full-galileo )
+script: ( cmdpid=$BASHPID; (sleep 600; kill $cmdpid) & exec bitbake image-full-galileo )
 
 after_script:
+ - git remote set-url --push origin https://$GH_APP_TOKEN@github.com/CoderDojo/galileo-system-image.git
+ - git config user.name alan-donnelly
+ - git config user.email ci@travis-ci.org
  - cd /home/travis/build/CoderDojo/galileo-system-image
  - git checkout -b 'v1.0.0'
- - git add -f meta-clanton_v1.0.0/sstate-cache/*
+ - git add -f meta-clanton_v1.0.0/yocto_build/sstate-cache/*
  - git commit -a -m 'Updating shared build state. [ci skip]'
  - git push
