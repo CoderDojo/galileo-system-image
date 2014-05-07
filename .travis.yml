@@ -12,15 +12,30 @@ before_install:
  - sudo ln -s /usr/local/bin/git /usr/bin/git
  - which git
  - git --version
+ - cd /home/travis/build/CoderDojo/galileo-system-image
+ - mkdir -p meta-clanton_v1.0.0/sstate-cache
+ - echo "CoderDojo meta-clanton_v1.0.0" > meta-clanton_v1.0.0/VERSION
+ - git checkout -b 'v1.0.0'
+ - git add -f meta-clanton_v1.0.0/sstate-cache
+ - git commit -a -m "Updating shared build state. [ci skip]"
+ - git push
 
 install: 
+ - mkdir /tmp/bsp
+ - mount --bind /home/travis/build/CoderDojo/galileo-system-image /tmp/bsp
+ - cd /tmp/bsp 
  - wget http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.0.7z
  - 7z x Board_Support_Package_Sources_for_Intel_Quark_v1.0.0.7z
  - sha1sum -c sha1sum.txt
  - tar xvf meta-clanton_v1.0.0.tar.gz
- - cd meta-clanton_v1.0.0
  - ./setup.sh
  - . poky/oe-init-build-env yocto_build
 
-script: bitbake image-full-galileo
+script: ( cmdpid=$BASHPID; (sleep 2700; kill $cmdpid) & exec bitbake image-full-galileo )
 
+after_script:
+ - cd /home/travis/build/CoderDojo/galileo-system-image
+ - git checkout -b 'v1.0.0'
+ - git add -f meta-clanton_v1.0.0/sstate-cache
+ - git commit -a -m 'Updating shared build state. [ci skip]'
+ - git push
