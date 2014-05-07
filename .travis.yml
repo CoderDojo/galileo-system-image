@@ -8,7 +8,7 @@ before_install:
  - wget https://github.com/alan-donnelly/galileo-git/archive/1.8.1.2.tar.gz -O galileo-git-1.8.1.2.tar.gz
  - tar -xf galileo-git-1.8.1.2.tar.gz
  - cd galileo-git-1.8.1.2
- - "sed -i -e \"s/install: all/install/\" Makefile"
+ - "sed -i -e \"s/install: all/install:/\" Makefile"
  - sudo make install 
  - cd ..
  - rm -rf galileo-git-1.8.1.2
