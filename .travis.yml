@@ -4,7 +4,7 @@ compiler:
 
 env: 
   global: 
-  - secure: CQK9KGcInMoZBRXtVkvYrdqZvXY8kdJ+fTE9Rv/iXzopfMkW3eNDS1QlavZZmZjUvPQy9nRdTicQJzVr9rmpMHNb35Cy35HBdJ4KhJoiKkaTlt/H64b0UOZAZhoie7R3fYd89VW3WXzHCsdW945jvXZjxzm+HXnLdHPSEMjOgz0=
+  - secure: "YgCtaC0QQb+Zzsg48hpd9PyFSqSpXjg1AEEvNvDIqO4Ao+raPmaCGsMii8WJIoXEiYDFSe0RMliyvIhzmutjJ/0M4SETpW/o+Eq6ydNrdmZB6LpK1DGZq/mFkrheCD3ggMPBK4aBERaR1pHe5Pb1S9HAaIoBcpXn6u0SXx8o2V0="
 
 before_install: 
  - sudo apt-get install -y build-essential p7zip-full diffstat texinfo chrpath
