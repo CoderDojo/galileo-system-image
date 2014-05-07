@@ -32,7 +32,7 @@ before_install:
 
 install: 
  - mkdir /tmp/bsp
- - mount --bind /home/travis/build/CoderDojo/galileo-system-image /tmp/bsp
+ - sudo mount --bind /home/travis/build/CoderDojo/galileo-system-image /tmp/bsp
  - cd /tmp/bsp 
  - wget http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.0.7z
  - 7z x Board_Support_Package_Sources_for_Intel_Quark_v1.0.0.7z
