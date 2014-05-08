@@ -31,7 +31,7 @@ install:
  - ./setup.sh
  - . poky/oe-init-build-env yocto_build
 
-script: ( (sleep 600; killall -s SIGINT python; sleep 60; killall -s SIGINT python) & (bitbake image-full-galileo ) )
+script: ( (sleep 2400; killall -s SIGINT python; sleep 60; killall -s SIGINT python) & (bitbake image-full-galileo ) )
 
 after_script:
  - git remote set-url --push origin https://$GH_APP_TOKEN@github.com/CoderDojo/galileo-system-image.git
@@ -42,6 +42,6 @@ after_script:
  - git commit -a -m 'Updating shared build state. $CI_SKIP'
  - git push 
 
+
 after_success:
  - export CI_SKIP="[ci skip]"
- 
