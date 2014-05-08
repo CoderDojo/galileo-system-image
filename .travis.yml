@@ -27,7 +27,7 @@ before_install:
  - git checkout -b 'v1.0.0'
  - git add meta-clanton_v1.0.0/README
  - git commit -a -m "Updating shared build state. [ci skip]"
- - git push
+ - git push -u origin 'v1.0.0'
 
 install: 
  - mkdir /tmp/bsp
@@ -42,7 +42,7 @@ install:
  - ./setup.sh
  - . poky/oe-init-build-env yocto_build
 
-script: ( cmdpid=$BASHPID; (sleep 600; kill $cmdpid) & exec bitbake image-full-galileo )
+script: (sleep 600; killall -s SIGINT python; sleep 60; killall -s SIGGINT python) & (bitbake image-full-galileo ; echo $? > /tmp/bitbake_exit_code; echo Done )
 
 after_script:
  - git remote set-url --push origin https://$GH_APP_TOKEN@github.com/CoderDojo/galileo-system-image.git
@@ -52,4 +52,4 @@ after_script:
  - git checkout -b 'v1.0.0'
  - git add -f meta-clanton_v1.0.0/yocto_build/sstate-cache/*
  - git commit -a -m 'Updating shared build state. [ci skip]'
- - git push
+ - git push -u origin 'v1.0.0'
