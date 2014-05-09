@@ -31,15 +31,16 @@ install:
  - ./setup.sh
  - . poky/oe-init-build-env yocto_build
 
-script: ( (sleep 2400; killall -s SIGINT python; sleep 60; killall -s SIGINT python) & (bitbake image-full-galileo ) )
+script: ( (sleep 2100; killall -s SIGINT python; sleep 60; killall -s SIGINT python) & (bitbake image-full-galileo ) )
 
 after_script:
  - git remote set-url --push origin https://$GH_APP_TOKEN@github.com/CoderDojo/galileo-system-image.git
  - git config user.name alan-donnelly
  - git config user.email ci@travis-ci.org
  - cd /home/travis/build/CoderDojo/galileo-system-image
+ - git checkout 'v1.0.0'
  - git add -f meta-clanton_v1.0.0/yocto_build/sstate-cache/*
- - git commit -a -m 'Updating shared build state. $CI_SKIP'
+ - git commit -a -m "Updating shared build state. $CI_SKIP"
  - git push 
 
 
