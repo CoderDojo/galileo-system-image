@@ -40,9 +40,9 @@ after_script:
  - cd /home/travis/build/CoderDojo/galileo-system-image
  - git checkout 'v1.0.0'
  - git add -f meta-clanton_v1.0.0/yocto_build/sstate-cache/*
+ - find meta-clanton-v1.0.0/yocto_build/tmp -name '*log*' -exec git add -f '{}'
  - git commit -a -m "Updating shared build state. $CI_SKIP"
  - git push 
-
 
 after_success:
  - export CI_SKIP="[ci skip]"
