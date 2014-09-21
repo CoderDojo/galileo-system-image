@@ -19,7 +19,7 @@ dependencies:
     - 7z x $(basename $BSP_URL)
 #    - sha1sum -c sha1sum.txt
     - tar xkvf meta-clanton_*.tar.gz
-    - cd meta-clanton_v1.0.0
+    - cd meta-clanton_*
     - ./setup.sh
     - . poky/oe-init-build-env yocto_build
 
