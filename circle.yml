@@ -6,6 +6,7 @@ machine:
     GALILEO_PATCHES: http://downloadmirror.intel.com/24272/eng/BSP-Patches-and-Build_Instructions.1.0.3.tar.bz2
     SSTATE_CACHE: /tmp/sstate-cache
 
+-post: 
 ## Configure git
     - git config --global user.email "not.my@email.com"
     - git config --global user.name "Alan Donnelly"
