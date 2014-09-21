@@ -39,13 +39,13 @@ dependencies:
     - tar -C $BSP -xkvf $BSP/$(basename $GALILEO_PATCHES)
 
   cache_directories:
-    - /tmp/sstate-cache
+#    - /tmp/sstate-cache
 #    - "~/custom_2" # relative to the user's home directory
 
 test:
   override:
     - gcc --version
-    - echo "SSTATE_DIR ?= \"$SSTATE_CACHE\"" >> $BSP/meta-clanton_*/yocto_build/conf/local.conf
+#    - echo "SSTATE_DIR ?= \"$SSTATE_CACHE\"" >> $BSP/meta-clanton_*/yocto_build/conf/local.conf
     - . $BSP/meta-clanton*/poky/oe-init-build-env $BSP/meta-clanton*/yocto_build && bitbake image-full-galileo
 
 #deployment:
