@@ -16,7 +16,7 @@ dependencies:
     - sudo apt-get install -y diffstat texinfo gawk chrpath file
     - git --version
     - wget $BSP_URL -O $BSP/$(basename $BSP_URL)
-    - 7z x -o $BSP $BSP/$(basename $BSP_URL)
+    - 7z x -o$BSP $BSP/$(basename $BSP_URL)
 #    - sha1sum -c sha1sum.txt
     - tar -C $BSP -xkvf $BSP/meta-clanton_*.tar.gz
     - $BSP/meta-clanton*/setup.sh
