@@ -5,8 +5,6 @@ machine:
     BSP: /tmp/bsp
     GALILEO_PATCHES: http://downloadmirror.intel.com/24272/eng/BSP-Patches-and-Build_Instructions.1.0.3.tar.bz2
     SSTATE_CACHE: /tmp/sstate-cache
-  post:
-    - sudo apt-get install -y build-essential gcc-multilib p7zip-full
 
 ## Configure git
     - git config --global user.email "not.my@email.com"
@@ -20,7 +18,7 @@ checkout:
 dependencies:
   override:
 ## Update system packages
-    - sudo apt-get install -y diffstat texinfo gawk chrpath file
+    - sudo apt-get install -y build-essential gcc-4.6-base gcc-4.6-multilib p7zip-full diffstat texinfo gawk chrpath file
     - git --version
     - gcc --version
 
