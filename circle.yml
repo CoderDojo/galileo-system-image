@@ -4,12 +4,14 @@ machine:
     BSP_URL: http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.1.7z
     BSP: /tmp/bsp
     GALILEO_PATCHES: http://downloadmirror.intel.com/24272/eng/BSP-Patches-and-Build_Instructions.1.0.3.tar.bz2
-    SSTATE_CACHE: /tmp/sstate-cache
 
 -post: 
 ## Configure git
     - git config --global user.email "not.my@email.com"
     - git config --global user.name "Alan Donnelly"
+
+## add sstate dir
+    - mkdir -p /tmp/sstate_cache
 
 checkout:
   post:
@@ -40,7 +42,7 @@ dependencies:
 
 test:
   override:
-    - mkdir -p $SSTATE_CACHE && echo "SSTATE_DIR ?= \"$SSTATE_CACHE\"" >> $BSP/meta-clanton_*/yocto_build/conf/local.conf
+    - echo "SSTATE_DIR ?= \"$SSTATE_CACHE\"" >> $BSP/meta-clanton_*/yocto_build/conf/local.conf
     - . $BSP/meta-clanton*/poky/oe-init-build-env $BSP/meta-clanton*/yocto_build && bitbake image-full-galileo
 
 #deployment:
