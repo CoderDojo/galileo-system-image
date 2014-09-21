@@ -40,7 +40,7 @@ dependencies:
 
 test:
   override:
-    - mkdir -p $SSTATE_CACHE && echo "SSTATE_DIR ?= $SSTATE_CACHE" >> $BSP/meta-clanton_*/yocto_build/conf/local.conf
+    - mkdir -p $SSTATE_CACHE && echo "SSTATE_DIR ?= \"$SSTATE_CACHE\"" >> $BSP/meta-clanton_*/yocto_build/conf/local.conf
     - . $BSP/meta-clanton*/poky/oe-init-build-env $BSP/meta-clanton*/yocto_build && bitbake image-full-galileo
 
 #deployment:
