@@ -2,6 +2,7 @@ machine:
   environment:
     BSP_VERSION: 1.0.3
     BSP_URL: "http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.1.7z"
+    BSP=/tmp/bsp
   post:
     - sudo apt-get install -y build-essential gcc-multilib p7zip-full
 
@@ -14,14 +15,11 @@ dependencies:
   override:
     - sudo apt-get install -y diffstat texinfo gawk chrpath file
     - git --version
-    - cd /tmp/bsp
-    - wget $BSP_URL
-    - 7z x $(basename $BSP_URL)
+    - wget $BSP_URL -O $BSP/$(basename $BSP_URL)
+    - 7z x -o $BSP $BSP/$(basename $BSP_URL)
 #    - sha1sum -c sha1sum.txt
-    - tar xkvf meta-clanton_*.tar.gz
-    - cd meta-clanton_*
-    - ./setup.sh
-    - . poky/oe-init-build-env yocto_build
+    - tar -C $BSP -xkvf $BSP/meta-clanton_*.tar.gz
+    - $BSP/meta-clanton*/setup.sh
 
 #  cache_directories:
 #    - "custom_1"   # relative to the build directory
@@ -29,8 +27,7 @@ dependencies:
 
 test:
   override:
-    - cd /tmp/bsp
-    - bitbake image-full-galileo
+    - . $BSP/meta-clandon*/poky/oe-init-build-env yocto_build && bitbake image-full-galileo
 
 #deployment:
 #  staging:
