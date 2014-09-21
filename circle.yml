@@ -3,6 +3,7 @@ machine:
     BSP_VERSION: 1.0.3
     BSP_URL: "http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.1.7z"
     BSP: /tmp/bsp
+    - GALILEO_PATCHES: http://downloadmirror.intel.com/24272/eng/BSP-Patches-and-Build_Instructions.1.0.3.tar.bz2
   post:
     - sudo apt-get install -y build-essential gcc-multilib p7zip-full
 
@@ -13,13 +14,20 @@ checkout:
 
 dependencies:
   override:
+## Update system packages
     - sudo apt-get install -y diffstat texinfo gawk chrpath file
     - git --version
+
+## Download and setup the Quark BSP 
     - wget $BSP_URL -O $BSP/$(basename $BSP_URL)
     - 7z x -o$BSP $BSP/$(basename $BSP_URL)
 #    - sha1sum -c sha1sum.txt
     - tar -C $BSP -xkvf $BSP/meta-clanton_*.tar.gz
-    - $BSP/meta-clanton*/setup.sh
+    - cd $BSP/meta-clanton && ./setup.sh
+
+## Download and extract Galileo patches
+    - wget $GALILEO_PATCHES -O $BSP/$(basename $GALILEO_PATCHES)
+    - tar -C $BSP -xkvf $BSP/$(basename $GALILEO_PATCHES)
 
 #  cache_directories:
 #    - "custom_1"   # relative to the build directory
