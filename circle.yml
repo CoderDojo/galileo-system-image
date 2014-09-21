@@ -1,0 +1,51 @@
+machine:
+  environment:
+    BSP_VERSION: 1.0.3
+    BSP_URL: "http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.1.7z"
+  post:
+    - sudo apt-get install -y build-essential p7zip-full diffstat texinfo chrpath
+
+checkout:
+  post:
+    - mkdir -p /tmp/bsp
+#    - sudo mount --bind /home/travis/build/CoderDojo/galileo-system-image /tmp/bsp
+
+dependencies:
+  override:
+    - cd /tmp/bsp
+    - wget $BSP_URL
+    - 7z x $(basename $BSP_URL)
+    - sha1sum -c sha1sum.txt
+    - tar xkvf meta-clanton_*.tar.gz
+    - cd meta-clanton_v1.0.0
+    - ./setup.sh
+    - . poky/oe-init-build-env yocto_build
+
+#  cache_directories:
+#    - "custom_1"   # relative to the build directory
+#    - "~/custom_2" # relative to the user's home directory
+
+test:
+  override:
+    - cd /tmp/bsp
+    - bitbake image-full-galileo
+
+#deployment:
+#  staging:
+#    branch: master
+#    heroku:
+#      appname: foo-bar-123
+
+
+#- sudo apt-get remove -y git
+# - wget https://github.com/alan-donnelly/galileo-git/archive/1.8.1.2.tar.gz -O galileo-git-1.8.1.2.tar.gz
+# - tar -xf galileo-git-1.8.1.2.tar.gz
+# - cd galileo-git-1.8.1.2
+# - "sed -i -e \"s/install: all/install:/\" Makefile"
+# - sudo make install 
+# - cd ..
+# - rm -rf galileo-git-1.8.1.2
+# - sudo ln -s /usr/local/bin/git /usr/bin/git
+# - git --version
+#
+
