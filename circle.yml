@@ -23,7 +23,7 @@ dependencies:
     - 7z x -o$BSP $BSP/$(basename $BSP_URL)
 #    - sha1sum -c sha1sum.txt
     - tar -C $BSP -xkvf $BSP/meta-clanton_*.tar.gz
-    - cd $BSP/meta-clanton && ./setup.sh
+    - cd $BSP/meta-clanton_* && ./setup.sh
 
 ## Download and extract Galileo patches
     - wget $GALILEO_PATCHES -O $BSP/$(basename $GALILEO_PATCHES)
