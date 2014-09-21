@@ -48,6 +48,10 @@ test:
 #    heroku:
 #      appname: foo-bar-123
 
+teardown:
+  post:
+    - echo "Tearing down!"
+
 
 #- sudo apt-get remove -y git
 # - wget https://github.com/alan-donnelly/galileo-git/archive/1.8.1.2.tar.gz -O galileo-git-1.8.1.2.tar.gz
