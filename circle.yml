@@ -5,21 +5,22 @@ machine:
     BSP: /tmp/bsp
     GALILEO_PATCHES: http://downloadmirror.intel.com/24272/eng/BSP-Patches-and-Build_Instructions.1.0.3.tar.bz2
 
--post: 
+  post: 
 ## Configure git
     - git config --global user.email "not.my@email.com"
     - git config --global user.name "Alan Donnelly"
 
-## add sstate dir
+## build directories
+    - mkdir -p /tmp/bsp
     - mkdir -p /tmp/sstate_cache
 
-checkout:
-  post:
-    - mkdir -p /tmp/bsp
+#checkout:
+#  post:
 #    - sudo mount --bind /home/travis/build/CoderDojo/galileo-system-image /tmp/bsp
 
 dependencies:
   override:
+
 ## Update system packages
     - sudo apt-get install -y build-essential gcc-4.6-base gcc-4.6-multilib p7zip-full diffstat texinfo gawk chrpath file
     - git --version
