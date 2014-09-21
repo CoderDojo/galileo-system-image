@@ -4,6 +4,7 @@ machine:
     BSP_URL: http://downloadmirror.intel.com/23197/eng/Board_Support_Package_Sources_for_Intel_Quark_v1.0.1.7z
     BSP: /tmp/bsp
     GALILEO_PATCHES: http://downloadmirror.intel.com/24272/eng/BSP-Patches-and-Build_Instructions.1.0.3.tar.bz2
+    SSTATE_CACHE: /tmp/sstate-cache
   post:
     - sudo apt-get install -y build-essential gcc-multilib p7zip-full
 
@@ -33,13 +34,14 @@ dependencies:
     - wget $GALILEO_PATCHES -O $BSP/$(basename $GALILEO_PATCHES)
     - tar -C $BSP -xkvf $BSP/$(basename $GALILEO_PATCHES)
 
-#  cache_directories:
-#    - "custom_1"   # relative to the build directory
+  cache_directories:
+    - $SSTATE_CACHE
 #    - "~/custom_2" # relative to the user's home directory
 
 test:
   override:
-    - . $BSP/meta-clanton*/poky/oe-init-build-env yocto_build && bitbake image-full-galileo
+    - mkdir -p $SSTATE_CACHE && echo "SSTATE_DIR ?= $SSTATE_CACHE" >> $BSP/meta-clanton_*/yocto_build/conf/local.conf
+    - . $BSP/meta-clanton*/poky/oe-init-build-env $BSP/meta-clanton*/yocto_build && bitbake image-full-galileo
 
 #deployment:
 #  staging:
