@@ -35,7 +35,7 @@ dependencies:
     - tar -C $BSP -xkvf $BSP/$(basename $GALILEO_PATCHES)
 
   cache_directories:
-    - $SSTATE_CACHE
+    - /tmp/sstate-cache
 #    - "~/custom_2" # relative to the user's home directory
 
 test:
