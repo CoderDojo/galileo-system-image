@@ -39,7 +39,7 @@ dependencies:
 
 test:
   override:
-    - . $BSP/meta-clandon*/poky/oe-init-build-env yocto_build && bitbake image-full-galileo
+    - . $BSP/meta-clanton*/poky/oe-init-build-env yocto_build && bitbake image-full-galileo
 
 #deployment:
 #  staging:
