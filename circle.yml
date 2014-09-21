@@ -22,6 +22,7 @@ dependencies:
 ## Update system packages
     - sudo apt-get install -y diffstat texinfo gawk chrpath file
     - git --version
+    - gcc --version
 
 ## Download and setup the Quark BSP 
     - wget $BSP_URL -O $BSP/$(basename $BSP_URL)
