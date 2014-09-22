@@ -38,7 +38,7 @@ dependencies:
 #    - sha1sum -c sha1sum.txt
     - tar -C $BSP -xkvf $BSP/meta-clanton_*.tar.gz
     - cd $BSP/meta-clanton_* && ./setup.sh
-    - cd $BSP/meta-clanton_*meta-clanton-bsp/recipes-testing/dejagnu/ && mv dejagnu-native_1.4.4.bb dejagnu-native_1.5.1.bb
+    - cd $BSP/meta-clanton_*/meta-clanton-bsp/recipes-testing/dejagnu/ && mv dejagnu-native_1.4.4.bb dejagnu-native_1.5.1.bb
 
 ## Download and extract Galileo patches
     - wget $GALILEO_PATCHES -O $BSP/$(basename $GALILEO_PATCHES)
