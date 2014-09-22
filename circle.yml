@@ -24,7 +24,7 @@ dependencies:
 ## Update system packages
     - sudo apt-get update
     - sudo apt-get upgrade
-    - sudo apt-get install -y build-essential gcc-4.6-base gcc-4.6-multilib p7zip-full diffstat texinfo gawk chrpath file dejagnu
+    - sudo apt-get install -y build-essential gcc-4.6-base gcc-4.6-multilib p7zip-full diffstat texinfo gawk chrpath file 
     - sudo apt-get autoremove
     - sudo ln -fs gcc-4.6 /usr/bin/gcc
     - git --version
@@ -39,6 +39,7 @@ dependencies:
 #    - sha1sum -c sha1sum.txt
     - tar -C $BSP -xkvf $BSP/meta-clanton_*.tar.gz
     - cd $BSP/meta-clanton_* && ./setup.sh
+    - cd $BSP/meta-clanton_*meta-clanton-bsp/recipes-testing/dejagnu/ && mv dejagnu-native_1.4.4.bb dejagnu-native_1.5.1.bb
 
 ## Download and extract Galileo patches
     - wget $GALILEO_PATCHES -O $BSP/$(basename $GALILEO_PATCHES)
