@@ -48,6 +48,9 @@ dependencies:
 test:
   override:
     - gcc --version
+    - sed -i -e "s/BB_NUMBER_THREADS = .*/BB_NUMBER_THREADS = \"4\"/" $BSP/meta-clanton_*/yocto_build/conf/local.conf
+    - sed -i -e "s/PARALLEL_MAKE = .*/PARALLEL_MAKE = \"-j 4\"/" $BSP/meta-clanton_*/yocto_build/conf/local.conf
+     
 #    - echo "SSTATE_DIR ?= \"$SSTATE_CACHE\"" >> $BSP/meta-clanton_*/yocto_build/conf/local.conf
     - . $BSP/meta-clanton*/poky/oe-init-build-env $BSP/meta-clanton*/yocto_build && bitbake image-full-galileo
 
