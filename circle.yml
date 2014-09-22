@@ -60,7 +60,7 @@ test:
 teardown:
   pre:
     - mkdir -p $CIRCLE_ARTIFACTS/logs
-    - find $BSP/meta-clanton_v*/yocto_build/ -name 'log.*' | xargs -I log mv log $CIRCLE_ARTIFACTS/logs
+    - find $BSP/meta-clanton_v*/yocto_build/ -name 'log.*' | xargs -I log_file mv log_file $CIRCLE_ARTIFACTS/logs/
   post:
     - echo "Push sstate to S3..."
 
