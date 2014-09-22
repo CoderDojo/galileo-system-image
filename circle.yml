@@ -27,6 +27,9 @@ dependencies:
     - git --version
     - gcc --version
 
+## Add AWS CLI tool
+    - sudo pip install --upgrade awscli
+
 ## Download and setup the Quark BSP 
     - wget $BSP_URL -O $BSP/$(basename $BSP_URL)
     - 7z x -o$BSP $BSP/$(basename $BSP_URL)
@@ -55,8 +58,11 @@ test:
 #      appname: foo-bar-123
 
 teardown:
+  pre:
+    - mkdir -p $CIRCLE_ARTIFACTS/logs
+    - find $BSP/meta-clanton_v*/yocto_build/ -name 'log.*' | xargs -I log mv log $CIRCLE_ARTIFACTS/logs
   post:
-    - echo "Tearing down!"
+    - echo "Push sstate to S3..."
 
 
 #- sudo apt-get remove -y git
