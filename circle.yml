@@ -22,7 +22,8 @@ dependencies:
   override:
 
 ## Update system packages
-    - sudo apt-get install -y build-essential gcc-4.6-base gcc-4.6-multilib p7zip-full diffstat texinfo gawk chrpath file
+    - sudo apt-get update
+    - sudo apt-get install -y build-essential gcc-4.6-base gcc-4.6-multilib p7zip-full diffstat texinfo gawk chrpath file dejagnu
     - sudo ln -fs gcc-4.6 /usr/bin/gcc
     - git --version
     - gcc --version
