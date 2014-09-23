@@ -13,6 +13,8 @@ machine:
 ## build directories
     - mkdir -p /tmp/bsp
     - mkdir -p /tmp/sstate_cache
+    
+    - for service in {"apache2","beanstalkd","cassandra","couchbase-server","couchdb","docker","elasticsearch","memcached","mongodb","mysql","neo4j-service","postgresql","puppet","redis-server","riak","solr","sphinxsearch","zookeeper"}; do sudo service $service stop; done
 
 #checkout:
 #  post:
@@ -51,7 +53,6 @@ dependencies:
 test:
   override:
     - gcc --version
-    - for service in {"apache2","beanstalkd","cassandra","couchbase-server","couchdb","docker","elasticsearch","memcached","mongodb","mysql","neo4j-service","postgresql","puppet","redis-server","riak","solr","sphinxsearch","zookeeper"}; do sudo service $service stop; done
     - sed -i -e "s/BB_NUMBER_THREADS = .*/BB_NUMBER_THREADS = \"4\"/" $BSP/meta-clanton_*/yocto_build/conf/local.conf
     - sed -i -e "s/PARALLEL_MAKE = .*/PARALLEL_MAKE = \"-j 4\"/" $BSP/meta-clanton_*/yocto_build/conf/local.conf
      
